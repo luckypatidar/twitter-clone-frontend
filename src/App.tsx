@@ -1,24 +1,57 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { FC } from "react"; // Import FC type for functional component
 
-function App() {
+import "./App.css";
+import Home from "./pages/Home/Home";
+import Profile from "./pages/Profile/Profile";
+import Explore from "./pages/Explore/Explore";
+import Signin from "./pages/Signin/Signin";
+import Navbar from "./components/Navbar/Navbar";
+import Error from "./pages/Error/Error";
+
+const Layout: FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="md:w-8/12 mx-auto">
+      <Navbar />
+      <Outlet></Outlet>
+    </div>
+  );
+};
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    errorElement: <Error />,
+    element: <Layout />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/profile/:id",
+        element: <Profile />,
+      },
+      {
+        path: "/explore",
+        element: <Explore />,
+      },
+      {
+        path: "/signin",
+        element: <Signin />,
+      },
+      {
+        path: "/signout",
+        element: <Signin />,
+      },
+    ],
+  },
+]);
+
+const App: FC = () => {
+  return (
+    <div>
+      <RouterProvider router={router}></RouterProvider>
     </div>
   );
 }
