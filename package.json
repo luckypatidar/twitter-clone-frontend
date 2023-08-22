@@ -56,6 +56,6 @@
   },
   "devDependencies": {
     "tailwindcss": "^3.3.3"
-  },
-  "proxy": "https://twitter-clone-backend-production-aa62.up.railway.app"
+  }
+
 }
