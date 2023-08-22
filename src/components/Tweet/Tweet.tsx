@@ -34,7 +34,7 @@ const Tweet = ({ tweet, setData }: CompProps) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const findUser = await axios.get(`/users/find/${tweet.userId}`);
+        const findUser = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/users/find/${tweet.userId}`);
 
         setUserData(findUser.data);
       } catch (err) {
@@ -49,18 +49,18 @@ const Tweet = ({ tweet, setData }: CompProps) => {
     e.preventDefault();
 
     try {
-      const like = await axios.put(`/tweets/${tweet._id}/like`, {
+      const like = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/tweets/${tweet._id}/like`, {
         id: currentUser._id,
       });
 
       if (location.includes("profile")) {
-        const newData = await axios.get(`/tweets/user/all/${id}`);
+        const newData = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/tweets/user/all/${id}`);
         setData(newData.data);
       } else if (location.includes("explore")) {
-        const newData = await axios.get(`/tweets/explore`);
+        const newData = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/tweets/explore`);
         setData(newData.data);
       } else {
-        const newData = await axios.get(`/tweets/timeline/${currentUser._id}`);
+        const newData = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/tweets/timeline/${currentUser._id}`);
         setData(newData.data);
       }
     } catch (err) {

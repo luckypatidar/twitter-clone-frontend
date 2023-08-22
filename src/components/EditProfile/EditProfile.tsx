@@ -30,7 +30,7 @@ const EditProfile = ({ setOpen }: EditProps) => {
   const navigate = useNavigate();
 
   const handleDelete = async () => {
-    const deleteProfile = await axios.delete(`/users/${currentUser._id}`);
+    const deleteProfile = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/users/${currentUser._id}`);
     dispatch(logout());
     navigate("/signin");
   };
@@ -66,7 +66,7 @@ const EditProfile = ({ setOpen }: EditProps) => {
           // Upload completed successfully, now we can get the download URL
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL: string) => {
             try {
-              const updateProfile = await axios.put(`/users/${currentUser._id}`, {
+              const updateProfile = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/users/${currentUser._id}`, {
                 profilePicture: downloadURL,
               });
   

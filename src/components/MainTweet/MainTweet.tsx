@@ -65,7 +65,7 @@ const MainTweet = () => {
             async (downloadURL: string) => {
               try {
                 const updateProfile = await axios.put(
-                  `/users/${currentUser._id}`,
+                  `${process.env.REACT_APP_BACKEND_URL}/users/${currentUser._id}`,
                   {
                     profilePicture: downloadURL,
                   }
@@ -98,7 +98,7 @@ const MainTweet = () => {
   const handleSubmit: HandleSubmitFunction = async (e) => {
     e.preventDefault();
     try {
-      const submitTweet = await axios.post("/tweets", {
+      const submitTweet = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/tweets`, {
         userId: currentUser._id,
         description: tweetText,
         imgUrl: imgUrl
